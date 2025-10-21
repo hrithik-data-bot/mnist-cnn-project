@@ -15,3 +15,7 @@ conda env create --file conda.yaml
 ```bash
 conda activate mnist-cnn-gpu
 ```
+4. **Deactivating the environment**
+```bash
+conda deactivate
+```
