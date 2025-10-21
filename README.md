@@ -19,3 +19,8 @@ conda activate mnist-cnn-gpu
 ```bash
 conda deactivate
 ```
+5. **Adding ipykernel**
+```bash
+conda activate mnist-cnn-gpu
+python -m ipykernel install --user --name=mnist-cnn-gpu
+```
