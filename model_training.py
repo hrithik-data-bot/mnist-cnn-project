@@ -29,7 +29,7 @@ class CNNModel:
             layers.Flatten(),
             layers.Dense(128, activation='relu'),
             layers.Dropout(0.4),
-            layers.Dense(self.num_classes, activation='softmax')  # dynamic number of classes
+            layers.Dense(self.num_classes, activation='softmax')  
         ])
 
         model.compile(
@@ -38,7 +38,6 @@ class CNNModel:
             metrics=['accuracy']
         )
 
-        # Display model summary
         print(f"{'*'*20} Model Summary {'*'*20}")
         print(model.summary())
         print("\n")
@@ -47,13 +46,20 @@ class CNNModel:
         history = model.fit(
             self.x_train,
             self.y_train,
-            epochs=5,
+            epochs=50,
             batch_size=64,
             validation_split=0.1
         )
 
         print(f"{'*'*20} Model Training Ended {'*'*20}")
-        return history
+
+        print(f"{'*'*20} Model Evaluation {'*'*20}")
+        train_loss, train_acc = model.evaluate(self.x_train, self.y_train, verbose=0)
+        test_loss, test_acc = model.evaluate(self.x_test, self.y_test, verbose=0)
+        
+        print(f"✅ Training Accuracy: {train_acc:.4f}, Loss: {train_loss:.4f}")
+        print(f"✅ Testing  Accuracy: {test_acc:.4f}, Loss: {test_loss:.4f}")
+        return history, model
 
 
 if __name__ == "__main__":
