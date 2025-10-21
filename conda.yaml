@@ -1,0 +1,15 @@
+name: mnist-cnn-gpu
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - seaborn
+  - cudatoolkit=12.3
+  - cudnn=9.1
+  - pip:
+      - tensorflow[and-cuda]
