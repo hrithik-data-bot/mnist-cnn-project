@@ -10,7 +10,6 @@ dependencies:
   - matplotlib
   - scikit-learn
   - seaborn
-  - cudatoolkit=12.3
   - cudnn=9.1
   - pip:
       - tensorflow[and-cuda]
