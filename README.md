@@ -7,3 +7,7 @@
 git clone git@github.com:hrithik-data-bot/mnist-cnn-project.git
 cd mnist-cnn-project
 ```
+2. **Managing the environment**
+```bash
+conda env create --file conda.yaml
+```
