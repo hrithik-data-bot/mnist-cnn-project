@@ -6,10 +6,11 @@ dependencies:
   - python=3.10
   - ipykernel
   - pip
-  - numpy
+  - numpy=1.25.2
   - matplotlib
   - scikit-learn
   - seaborn
-  - cudnn=9.1
+  - cudatoolkit
+  - cudnn=8.9
   - pip:
-      - tensorflow[and-cuda]
+      - tensorflow==2.15
