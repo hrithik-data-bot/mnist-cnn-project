@@ -1,2 +1,9 @@
 # mnist-cnn-project
-“CNN-based handwritten digit recognition using TensorFlow/Keras on the MNIST dataset. College AI project demonstrating image classification, GPU support, and training/validation visualization.”
+
+## ⚙️ Setup Instructions
+
+1. **Clone the repository**
+```bash
+git clone git@github.com:hrithik-data-bot/mnist-cnn-project.git
+cd mnist-cnn
+```
