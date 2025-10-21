@@ -7,7 +7,11 @@
 git clone git@github.com:hrithik-data-bot/mnist-cnn-project.git
 cd mnist-cnn-project
 ```
-2. **Managing the environment**
+2. **Creating the environment**
 ```bash
 conda env create --file conda.yaml
+```
+3. **Activating the environment**
+```bash
+conda activate mnist-cnn-gpu
 ```
