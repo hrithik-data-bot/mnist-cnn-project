@@ -35,6 +35,3 @@ def visualize_images_with_labels() -> None:
 
     plt.tight_layout()
     plt.show()
-
-if __name__ == "__main__":
-    visualize_images_with_labels()
