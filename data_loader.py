@@ -34,5 +34,7 @@ def visualize_images_with_labels() -> None:
         ax.axis('off')
 
     plt.tight_layout()
-    plt.switch_backend('TkAgg')
     plt.show()
+
+if __name__ == "__main__":
+    visualize_images_with_labels()
