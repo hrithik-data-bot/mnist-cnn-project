@@ -1,5 +1,6 @@
 """module for model training"""
 
+import time
 import numpy as np
 from tensorflow.keras import layers, models   # pyright: ignore[reportMissingImports]
 from data_loader import load_image_data
@@ -42,6 +43,7 @@ class CNNModel:
         print(model.summary())
         print("\n")
         print(f"{'*'*20} Model Training Started {'*'*20}")
+        start = time.time()
 
         history = model.fit(
             self.x_train,
@@ -51,7 +53,9 @@ class CNNModel:
             validation_split=0.1
         )
 
+        end = time.time()
         print(f"{'*'*20} Model Training Ended {'*'*20}")
+        print(f"Total training time:- {(end-start)/60} minutes")
 
         print(f"{'*'*20} Model Evaluation {'*'*20}")
         train_loss, train_acc = model.evaluate(self.x_train, self.y_train, verbose=0)
