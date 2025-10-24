@@ -55,10 +55,10 @@ class CNNModel:
 
         print(f"{'*'*20} Model Evaluation {'*'*20}")
         train_loss, train_acc = model.evaluate(self.x_train, self.y_train, verbose=0)
-        test_loss, test_acc = model.evaluate(self.x_test, self.y_test, verbose=0)
+        test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
         
-        print(f"✅ Training Accuracy: {train_acc:.4f}, Loss: {train_loss:.4f}")
-        print(f"✅ Testing  Accuracy: {test_acc:.4f}, Loss: {test_loss:.4f}")
+        print(f"Training Accuracy: {train_acc:.4f}, Loss: {train_loss:.4f}")
+        print(f"Testing  Accuracy: {test_acc:.4f}, Loss: {test_loss:.4f}")
         return history, model
 
 
