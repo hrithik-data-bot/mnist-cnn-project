@@ -54,8 +54,8 @@ class CNNModel:
         )
 
         end = time.time()
-        print(f"{'*'*20} Model Training Ended {'*'*20}")
         print(f"Total training time:- {(end-start)/60} minutes")
+        print(f"{'*'*20} Model Training Ended {'*'*20}")
 
         print(f"{'*'*20} Model Evaluation {'*'*20}")
         train_loss, train_acc = model.evaluate(self.x_train, self.y_train, verbose=0)
