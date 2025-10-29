@@ -21,17 +21,26 @@ class CNNModel:
         """method to build, train, and return the model's training history"""
 
         model = models.Sequential([
-            layers.Conv2D(32, (3, 3), activation='relu', input_shape=self.input_shape),
-            layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(32, (3,3), activation='relu', padding='same', input_shape=self.input_shape),
+        layers.BatchNormalization(),
+        layers.Conv2D(32, (3,3), activation='relu', padding='same'),
+        layers.BatchNormalization(),
+        layers.MaxPooling2D((2,2)),
+        layers.Dropout(0.25),
 
-            layers.Conv2D(64, (3, 3), activation='relu'),
-            layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(64, (3,3), activation='relu', padding='same'),
+        layers.BatchNormalization(),
+        layers.Conv2D(64, (3,3), activation='relu', padding='same'),
+        layers.BatchNormalization(),
+        layers.MaxPooling2D((2,2)),
+        layers.Dropout(0.3),
 
-            layers.Flatten(),
-            layers.Dense(128, activation='relu'),
-            layers.Dropout(0.4),
-            layers.Dense(self.num_classes, activation='softmax')  
-        ])
+        layers.Flatten(),
+        layers.Dense(256, activation='relu'),
+        layers.BatchNormalization(),
+        layers.Dropout(0.5),
+        layers.Dense(self.num_classes, activation='softmax')
+    ])
 
         model.compile(
             optimizer='adam',
