@@ -22,6 +22,7 @@ conda deactivate
 5. **Running the Code**
 ```bash
 cd mnist-cnn-project
+conda env create --file conda.yaml
 conda activate mnist-cnn-gpu
 python runner.py
 ```
