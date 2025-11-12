@@ -75,7 +75,7 @@ class CNNModel:
 
         history = model.fit(
             self.x_train, self.y_train,
-            epochs=50,
+            epochs=5,
             batch_size=64,
             validation_data=(self.x_val, self.y_val),
             verbose=1
@@ -96,18 +96,21 @@ class CNNModel:
         print(f"Validation -> Accuracy: {val_acc * 100:.3f}%, Loss: {val_loss:.4f}")
         print(f"Testing    -> Accuracy: {test_acc * 100:.3f}%, Loss: {test_loss:.4f}")
 
-        # Plot accuracy and loss
-        self.plot_history(history)
+        # Plot and save accuracy/loss
+        self.plot_history(history, save_path="accuracy_loss_plot.png")
 
-        # Save model
-        # model.save("mnist_cnn_final_model.h5")
-        # print("\n💾 Model saved successfully as 'mnist_cnn_final_model.h5'")
+        # Plot and save confusion matrix
+        self.plot_confusion_matrix(model, save_path="confusion_matrix.png")
+
+        # Save the model
+        model.save("mnist_cnn_final_model.h5")
+        print("\nModel saved successfully as 'mnist_cnn_final_model.h5'")
 
         return history, model
 
     @staticmethod
-    def plot_history(history):
-        """Plot training and validation accuracy/loss per epoch"""
+    def plot_history(history, save_path="accuracy_loss_plot.png"):
+        """Plot training and validation accuracy/loss per epoch and save"""
         acc = history.history['accuracy']
         val_acc = history.history['val_accuracy']
         loss = history.history['loss']
@@ -137,9 +140,34 @@ class CNNModel:
         plt.grid(True)
 
         plt.tight_layout()
-        plt.show()
+        plt.savefig(save_path)
+        print(f"Accuracy/Loss plot saved as '{save_path}'")
 
+    def plot_confusion_matrix(self, model, save_path="confusion_matrix.png"):
+        """Compute and plot confusion matrix without sklearn and save"""
+        y_pred = np.argmax(model.predict(self.x_test), axis=1)
+        conf_mat = np.zeros((self.num_classes, self.num_classes), dtype=int)
 
-if __name__ == "__main__":
-    m = CNNModel(X_train, y_train, X_val, y_val, X_test, y_test)
-    m.cnn_model()
+        for true, pred in zip(self.y_test, y_pred):
+            conf_mat[true, pred] += 1
+
+        print("\nConfusion Matrix:")
+        print(conf_mat)
+
+        plt.figure(figsize=(7, 6))
+        plt.imshow(conf_mat, cmap='Blues')
+        plt.title('Confusion Matrix')
+        plt.xlabel('Predicted Labels')
+        plt.ylabel('True Labels')
+        plt.colorbar()
+
+        # Add numbers on each cell
+        for i in range(self.num_classes):
+            for j in range(self.num_classes):
+                plt.text(j, i, str(conf_mat[i, j]),
+                         ha='center', va='center',
+                         color='white' if conf_mat[i, j] > conf_mat.max() / 2 else 'black')
+
+        plt.tight_layout()
+        plt.savefig(save_path)
+        print(f"Confusion matrix plot saved as '{save_path}'")
